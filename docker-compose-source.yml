@@ -5,6 +5,7 @@ services:
   librespot:
   
     build: 
+      context: .
       dockerfile: Dockerfile.source
     container_name: librespot
     image: librespot-java:source
