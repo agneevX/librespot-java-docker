@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+
+  librespot:
+  
+    build: 
+      dockerfile: Dockerfile.source
+    container_name: librespot
+    image: librespot-java
+    restart: unless-stopped
+    network_mode: host
+    devices:
+      - /dev/snd:/dev/snd

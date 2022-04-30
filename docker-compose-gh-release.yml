@@ -5,7 +5,7 @@ services:
   librespot:
 
     build: 
-      dockerfile: Dockerfile.GH-release
+      dockerfile: Dockerfile.gh-release
     container_name: librespot
     image: librespot-java
     restart: unless-stopped
