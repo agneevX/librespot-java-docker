@@ -7,7 +7,7 @@ services:
     build: 
       dockerfile: Dockerfile.gh-release
     container_name: librespot
-    image: librespot-java
+    image: librespot-java:gh-release
     restart: unless-stopped
     network_mode: host
     devices:

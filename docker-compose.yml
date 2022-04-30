@@ -6,7 +6,7 @@ services:
   
     build: .
     container_name: librespot
-    image: librespot-java
+    image: librespot-java:latest
     restart: unless-stopped
     network_mode: host
     devices:

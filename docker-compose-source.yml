@@ -7,7 +7,7 @@ services:
     build: 
       dockerfile: Dockerfile.source
     container_name: librespot
-    image: librespot-java
+    image: librespot-java:source
     restart: unless-stopped
     network_mode: host
     devices:
