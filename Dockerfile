@@ -14,7 +14,7 @@ RUN cd /root \
 
 FROM alpine:3.15
 
-RUN apk add dumb-init alsa-utils openjdk17-jre-headless
+RUN apk add dumb-init alsa-utils openjdk17-jre
 
 COPY --from=builder /root/player.jar /app/player.jar
 COPY config.toml /config/config.toml
