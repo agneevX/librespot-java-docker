@@ -11,5 +11,7 @@ services:
     image: librespot-java:gh-release
     restart: unless-stopped
     network_mode: host
+    volumes:
+      - ./user-data:/config
     devices:
       - /dev/snd:/dev/snd
