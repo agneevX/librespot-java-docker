@@ -2,11 +2,15 @@ name: Docker
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - testing
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags:
+      - 'v*.*.*'
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 env:
   REGISTRY: ghcr.io
@@ -39,7 +43,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
-      - name: Setup Docker BuildX
+      - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Log into registry ${{ env.REGISTRY }}
