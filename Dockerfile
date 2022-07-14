@@ -9,15 +9,15 @@ RUN cd /root \
     && wget -q https://github.com/librespot-org/librespot-java/archive/refs/tags/v$LIBRESPOT_VERSION.zip \
     && unzip -q ./v$LIBRESPOT_VERSION.zip \
     && cd ./librespot-java-$LIBRESPOT_VERSION \
-    && mvn -T $(grep -c ^processor /proc/cpuinfo) --batch-mode clean package \
-    && mv ./player/target/librespot-player-*.jar /root/player.jar
+    && mvn clean package \
+    && mv ./player/target/librespot-player-*.jar /player.jar
 
-FROM alpine:3.15
+FROM alpine:latest
 
 RUN apk add dumb-init alsa-utils openjdk17-jre
 
-COPY --from=builder /root/player.jar /app/player.jar
-COPY config.toml /config/config.toml
+COPY --from=builder /player.jar /app/
+COPY config.toml /config/
 
 VOLUME /config
 WORKDIR /config

@@ -3,10 +3,10 @@ FROM maven:3.8.5 as builder
 RUN cd /root \
     && git clone https://github.com/librespot-org/librespot-java \
     && cd ./librespot-java \
-    && mvn -T $(grep -c ^processor /proc/cpuinfo) --batch-mode clean package \
+    && mvn clean package \
     && mv ./player/target/librespot-player-*.jar /root/player.jar
 
-FROM alpine:3.15
+FROM alpine:latest
 
 RUN apk add dumb-init alsa-utils openjdk17-jre
 

@@ -3,10 +3,8 @@ version: '2.1'
 services:
 
   librespot:
-  
-    build: .
     container_name: librespot
-    image: librespot-java:latest
+    image: agneev/librespot-java
     restart: unless-stopped
     network_mode: host
     volumes:
