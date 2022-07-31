@@ -1,4 +1,4 @@
-FROM maven:3.8.5 as builder
+FROM maven:latest as builder
 
 ARG LIBRESPOT_VERSION=1.6.2
 
@@ -6,17 +6,19 @@ RUN apt-get update \
     && apt-get install -yq wget unzip
 
 RUN cd /root \
-    && wget -q https://github.com/librespot-org/librespot-java/archive/refs/tags/v$LIBRESPOT_VERSION.zip \
-    && unzip -q ./v$LIBRESPOT_VERSION.zip \
-    && cd ./librespot-java-$LIBRESPOT_VERSION \
-    && mvn clean package \
-    && mv ./player/target/librespot-player-*.jar /player.jar
+    && wget https://github.com/librespot-org/librespot-java/archive/refs/tags/v$LIBRESPOT_VERSION.zip \
+    && unzip v*.zip \
+    && cd librespot* \
+    && mvn clean package
 
-FROM alpine:latest
+FROM alpine:latest as final
 
-RUN apk add dumb-init alsa-utils openjdk17-jre
+RUN apk -U add \
+    dumb-init \
+    openjdk17-jre \
+    alsa-utils
 
-COPY --from=builder /player.jar /app/
+COPY --from=builder /root/librespot*/player/target/librespot-player-*.jar /app/player.jar
 COPY config.toml /config/
 
 VOLUME /config

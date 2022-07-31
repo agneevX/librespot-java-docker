@@ -1,17 +1,19 @@
-FROM maven:3.8.5 as builder
+FROM maven:latest as builder
 
 RUN cd /root \
     && git clone https://github.com/librespot-org/librespot-java \
-    && cd ./librespot-java \
-    && mvn clean package \
-    && mv ./player/target/librespot-player-*.jar /root/player.jar
+    && cd librespot-java \
+    && mvn clean package
 
-FROM alpine:latest
+FROM alpine:latest as final
 
-RUN apk add dumb-init alsa-utils openjdk17-jre
+RUN apk -U add \
+    dumb-init \
+    openjdk17-jre \
+    alsa-utils 
 
-COPY --from=builder /root/player.jar /app/player.jar
-COPY config.toml /config/config.toml
+COPY --from=builder /root/librespot-java/player/target/librespot-player-*.jar /app/player.jar
+COPY config.toml /config/
 
 VOLUME /config
 WORKDIR /config
