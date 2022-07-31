@@ -34,7 +34,7 @@ This compiles from the latest code in the `master` branch of `librespot-java`.
 ```sh
 git clone https://github.com/agneevX/librespot-java-docker
 
-docker build . -f ./Dockerfile.source -t librespot-java:master
+docker build . -f ./source.Dockerfile -t librespot-java:master
 
 docker run -d --network host librespot-java:master
 ```
