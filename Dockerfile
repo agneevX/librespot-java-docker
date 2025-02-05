@@ -1,6 +1,6 @@
 FROM maven:latest as builder
 
-ARG LIBRESPOT_JAVA_VERSION=1.6.3
+ARG LIBRESPOT_JAVA_VERSION=1.6.5
 
 RUN apt-get update \
     && apt-get install -yq wget unzip
